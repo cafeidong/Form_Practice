@@ -1,0 +1,30 @@
+.box{
+    padding:20px;
+    color: #0a1633;
+    border-bottom: 1px solid #e7e7f0;
+    text-align: center;
+}
+
+
+.sider-with-border {
+    background: #fff;
+    text-align: center;
+    border-right: 1px solid #e8e8e8; /* 右侧边框 */
+  }
+
+.simpleheader{
+    background: #ffffff;
+    background-color: rgba(39, 52, 121, 0.4);
+    height:22px;
+    color: white;
+    text-align: center
+}
+
+.mainbox {
+    border-radius: 8px;  /* 设置小圆角，可以根据需要调整大小 */
+    background-color:#ffffff;
+    margin:7px;
+    height: 80vh;
+    padding: 13px;
+  }
+  
