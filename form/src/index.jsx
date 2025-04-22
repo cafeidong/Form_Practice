@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client'; 
-import MainPage from './app'; 
+import ReactDOM from 'react-dom';  // React 16 的导入方式
+import App from './app';
 
-const rootElement = document.getElementById('root');
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <MainPage />
-  </React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root') // 将应用挂载到 HTML 中的 root 元素
 );
