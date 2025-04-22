@@ -2,7 +2,7 @@
   "name": "form",
   "version": "1.0.0",
   "description": "",
-  "main": "index.jsx",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",
@@ -12,27 +12,33 @@
   "license": "ISC",
   "dependencies": {
     "@ucloud-fe/react-components": "^1.17.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^16.14.0",  
+    "react-dom": "^16.14.0" 
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@commitlint/config-conventional": "^19.8.0",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
     "babel-loader": "^10.0.0",
     "babel-plugin-import": "^1.13.8",
     "commitizen": "^4.3.1",
     "commitlint": "^19.8.0",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
     "webpack": "^5.99.5",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
   },
-  "config":{
-    "commitizen":{
+  "config": {
+    "commitizen": {
       "path": "./node_modules/cz-customizable"
     }
   }
