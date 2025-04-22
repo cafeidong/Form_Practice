@@ -1,4 +1,3 @@
-// declarations.d.ts
 
 declare module '@ucloud-fe/react-components/lib/components/Layout' {
     const Layout: any;

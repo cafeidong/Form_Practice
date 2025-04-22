@@ -45,15 +45,22 @@ function Newform(props:any) {
     const { form } = props;
     const Submit = () => {
         form.validateFields((errors:any, values:any) => {
-            if (!errors) {
+            if(ipMessage){
+                errors.ipMessage=ipMessage;
+            }
+            if(noticeMessage){
+                errors.noticeMessage=noticeMessage;
+            }
+            if(errors){
+                console.log(errors);
+            }else{
                 const Data={...values};
                 console.log('Form data:', Data);  
-            } else {
-                console.log(errors);  
-            }
+            } 
         });
 
     }
+
     const type = ['a', 'b', 'c', '4'];
     const [value, setValue] = useState(type[0]);
 
@@ -64,18 +71,16 @@ function Newform(props:any) {
         }
     };
 
-    const [noticeStyle, setNoticeStyle] = useState<string>('');
-    const [noticeMessage, setNoticeMessage] = useState<String>('');
+    const [noticeMessage, setNoticeMessage] = useState<String>('输入不能为空！');//名称错误提示
+    const [ipMessage, setipMessage] = useState<String>('ip不能为空！');//ip错误提示
+
     const handlePasswordChange = (e:any) => {
         let passwordval = e.target.value;
-        if (!value) {
-            setNoticeStyle('warning');
-            setNoticeMessage('密码不能为空')
-        }
-        else {
-            setNoticeStyle('success');
-            setNoticeMessage('输入成功')
-        }
+    }
+
+    function judgeIp(ip:string):boolean{
+        const ipv4Rule = /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;
+        return ipv4Rule.test(ip);
     }
 
     return (
@@ -95,18 +100,39 @@ function Newform(props:any) {
                             options={type.map((item) => ({ value: item, label: item }))}
                         />
                     </Item>
-                    <Item label='名称' required='true'>
+                    <Item label='名称' required='true' help={noticeMessage}>
                         <Input
                             {...form.getFieldProps('name', {
-                                rules: [{ required: true}],
+                                rules: [{ required: true }],
                             })}
+                            onChange={(e: any) => {
+                                form.getFieldProps('name').onChange(e);
+                                if (e.target.value.length < 10 || e.target.value.length > 20) {
+                                    setNoticeMessage('名称长度必须在10～20！');
+                                }
+                                else {
+                                    setNoticeMessage('');
+                                }
+                            }
+                            }
                         />
                     </Item>
-                    <Item label='资源IP' required='true' help="帮助内容">
+                    <Item label='资源IP' required='true' help={ipMessage}>
                         <Input
                             {...form.getFieldProps('resourceIp', {
-                                rules: [{ required: true}],
+                                rules: [{ required: true }],
                             })}
+                            onChange={(e: any) => {
+                                form.getFieldProps('resourceIpç').onChange(e);
+                                if (!judgeIp(e.target.value)) {
+                                    setipMessage('请输入格式正确的ipv4地址');
+                                }
+                                else {
+                                    setipMessage('');
+                                }
+                            }
+                            }
+
                         />
                     </Item>
                     <Item label='端口' required='true' help='请输入大于1500的整数'>
@@ -129,12 +155,14 @@ function Newform(props:any) {
                                 rules: [{ required: true }],
                             })}
                         />
+                    </Item>
+                    {/* <Item>
                         {noticeStyle && (
                             <Notice styleType={noticeStyle} style={{ width: '50%' }}>
                                 {noticeMessage}
                             </Notice>
                         )}
-                    </Item>
+                    </Item> */}
                 </Form>
             </Content>
             <Footer style={footerStyle}>
